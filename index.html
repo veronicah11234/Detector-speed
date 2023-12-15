@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Demerit Points Calculator</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin: 50px;
+    }
+
+    input {
+      padding: 10px;
+      margin-right: 10px;
+    }
+
+    button {
+      padding: 10px;
+    }
+
+    #result {
+      margin-top: 20px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+  <label for="speed">Enter car speed:</label>
+  <input type="number" id="speed" required>
+  
+  <button onclick="calculateDemeritPoints()">Calculate Demerit Points</button>
+
+  <div id="result"></div>
+
+  <script>
+    function calculateDemeritPoints() {
+      const speedInput = document.getElementById('speed');
+      const resultDiv = document.getElementById('result');
+
+      const carSpeed = parseFloat(speedInput.value);
+
+      const speedLimit = 70;
+      const demeritPointsPer5Km = 1;
+      const pointsThresholdForSuspension = 12;
+
+      if (carSpeed < speedLimit) {
+        resultDiv.innerText = "Ok";
+      } else {
+        const demeritPoints = Math.floor((carSpeed - speedLimit) / 5);
+
+        if (demeritPoints > pointsThresholdForSuspension) {
+          resultDiv.innerText = "License suspended";
+        } else {
+          resultDiv.innerText = `Points: ${demeritPoints}`;
+        }
+      }
+    }
+  </script>
+
+</body>
+</html>
